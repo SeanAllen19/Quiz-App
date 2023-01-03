@@ -7,10 +7,6 @@
     text-align: center;
 }
 
-.top-left {
-   
-}
-
 nav {
     display: flex;
     justify-content: space-between;
@@ -18,4 +14,10 @@ nav {
     margin-right: 20px;
     
 }
+
+
+.top-left {
+   
+}
+
 
