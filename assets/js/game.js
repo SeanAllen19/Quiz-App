@@ -5,7 +5,7 @@ var choices = document.getElementsByClassName('choice')
 // Timer Section
 var timeHeader = document.querySelector('h3')
 var timeSecond = 60;
-displayTime(timeSecond)
+displayTime(timeSecond);
 
 var countDown = setInterval( () => {
     timeSecond--;
@@ -28,7 +28,7 @@ function endTime() {
 
 
 // Questions
-var question = [
+var questions = [
     {
         question: "Who is the main character in Pokemon?" ,
         choice1: "Ash",
@@ -134,12 +134,22 @@ var question = [
 // GamePlay
 
 var incorrectAnswer = -15;
-var currentQuestion = {};
 var acceptingAnswers = true;
-var sco
 
 
-// function startGame {
-//     question
-// }
-// startGame()
+function startGame() {
+    
+    getNewQuestion();
+}
+
+function getNewQuestion() {
+    var randomQuestion = Math.floor(Math.random() * questions.length);
+    currentQuestion = questions[randomQuestion];
+    question.innerText = currentQuestion['question'];
+    
+    console.log(randomQuestion)
+    console.log(currentQuestion)
+    console.log(question.innerText)
+}
+
+startGame()
