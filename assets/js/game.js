@@ -1,3 +1,7 @@
+// DOM Selectors
+var question = document.getElementById('question');
+var choices = document.getElementsByClassName('choice')
+
 // Timer Section
 var timeHeader = document.querySelector('h3')
 var timeSecond = 60;
@@ -19,7 +23,7 @@ function displayTime(second) {
 }
 
 function endTime() {
-    timeHeader.innerHTML = 'Something new'
+    timeHeader.innerHTML = 'Redirect to highscore.html'
 }
 
 
@@ -129,3 +133,13 @@ var question = [
 
 // GamePlay
 
+var incorrectAnswer = -15;
+var currentQuestion = {};
+var acceptingAnswers = true;
+var sco
+
+
+// function startGame {
+//     question
+// }
+// startGame()
