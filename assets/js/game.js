@@ -1,15 +1,14 @@
 // DOM Selectors
 var question = document.getElementById('question');
-var choice1 =document.getElementById('choice1');
-var choice2 =document.getElementById('choice2');
-var choice3 =document.getElementById('choice3');
-var choice4 =document.getElementById('choice4');
 var choices =Array.from(document.getElementsByClassName('choice')); //making an array of all my choices, so its easier to use  array methods.
-var _button = document.getElementsByClassName('button');
-
+// var choice1 =document.getElementById('choice1');
+// var choice2 =document.getElementById('choice2');
+// var choice3 =document.getElementById('choice3');
+// var choice4 =document.getElementById('choice4');
+// var _button = document.getElementsByClassName('button');
 // console.log(choices);
 
-// Timer Section
+//////////////////////////////////////// Timer Section
 var timeHeader = document.querySelector('h3')
 var timeSecond = 60;
 displayTime(timeSecond);
@@ -35,8 +34,7 @@ function endTime() {
     // return window.location.assign("./highscores.html");
 }
 
-///////////////////////////////////////////////////////////////////////////
-// Questions
+/////////////////////////////////////////// Questions
 var questions =  [
     {
         question: "Who is the main character in Pokemon?" ,
@@ -139,7 +137,6 @@ var questions =  [
 
     },
 ] //11 total questions
-
 var adjustableQuestion = questions.slice();
 // separate array to splice out of.
 // console.log(adjustableQuestion)
@@ -149,12 +146,16 @@ var acceptingAnswers = false;
 
 
 function startGame() {
+    adjustableQuestion;
     questionCounter = 0;
     // console.log(adjustableQuestion[0]['answer']); targeting first answer in the adjustableQuestion array
     getNewQuestion();
 }
 
 function getNewQuestion() {
+    if (adjustableQuestion.length === 0) {
+        return window.location.assign("./highscores.html")
+    }
     questionCounter++;
     var randomQuestion = Math.floor(Math.random() * adjustableQuestion.length); //console.log(randomQuestion)
     currentQuestion = adjustableQuestion[randomQuestion]; // number console.log(currentQuestion)
@@ -176,26 +177,37 @@ function getNewQuestion() {
 };
 
 // select choice from list 
-    choices.forEach(chosen => {
-        chosen.addEventListener("click", e => {
-            console.log(e.target)
-        })
-    });
+    // choices.forEach(chosen => {
+    //     chosen.addEventListener("click", e => {
+    //         console.log(e.target)
+    //         if(!acceptingAnswers) return
+    //     })
+    // });
     
 
    
-    
+ /////////////////////////// choices section   
 choices.forEach(choices => {
     choices.addEventListener("click", e =>{
         if (!acceptingAnswers) return;
 
-        acceptingAnswers = true;
+        acceptingAnswers = false;
         var selectedChoice = e.target;
         var selectedAnswer = selectedChoice.dataset['number'];
-        console.log(selectedAnswer);
+        console.log(selectedAnswer == currentQuestion.answer);
+       
+        var classToApply = 'incorrect';
+            if(selectedAnswer == currentQuestion.answer) {
+                classToApply = 'correct';
+            selectedChoice.parentElement.classList.add(classToApply);
+            selectedChoice.parentElement.classList.remove(classToApply)
+            }
+            console.log(classToApply)
+
+            ;
         getNewQuestion();
     })
-})
+});
 // ///
     
 

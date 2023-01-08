@@ -5,7 +5,13 @@ nav {
     margin-right: 20px;
     
 }
-
+.choice:hover{
+    cursor: pointer;
+    box-shadow: 1em;
+    background-color:grey;
+    transition: 0.7s;
+    
+}
 .container {
     height: 100vh;
     width: 100vw;
@@ -14,6 +20,18 @@ nav {
     justify-content: center;
     text-align: center;
 }
+p {
+    border: 1px black solid;
+    padding: 1em;
+    margin: 1em;
+}
 
+.correct {
+    background-color: green;
+}
+
+.incorrect {
+    background-color: brown;
+}
 
 
