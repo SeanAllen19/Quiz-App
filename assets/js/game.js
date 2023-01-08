@@ -1,6 +1,13 @@
 // DOM Selectors
 var question = document.getElementById('question');
-var choice =Array.from(document.getElementsByClassName('choice'));
+var choice1 =document.getElementById('choice1');
+var choice2 =document.getElementById('choice2');
+var choice3 =document.getElementById('choice3');
+var choice4 =document.getElementById('choice4');
+var choices =Array.from(document.getElementsByClassName('choice')); //making an array of all my choices, so its easier to use  array methods.
+var _button = document.getElementsByClassName('button');
+
+// console.log(choices);
 
 // Timer Section
 var timeHeader = document.querySelector('h3')
@@ -13,6 +20,7 @@ var countDown = setInterval( () => {
     if(timeSecond < 0){
         endTime()
         clearInterval(countDown)
+        
     }
 }, 1000)
 
@@ -23,12 +31,13 @@ function displayTime(second) {
 }
 
 function endTime() {
-    timeHeader.innerHTML = 'Redirect to highscore.html'
+    timeHeader.innerHTML = '00:00 uncomment return str';
+    // return window.location.assign("./highscores.html");
 }
 
-
+///////////////////////////////////////////////////////////////////////////
 // Questions
-var questions = [
+var questions =  [
     {
         question: "Who is the main character in Pokemon?" ,
         choice1: "Ash",
@@ -129,81 +138,69 @@ var questions = [
         answer: 2
 
     },
-]
+] //11 total questions
+
 var adjustableQuestion = questions.slice();
-
-console.log(adjustableQuestion)
+// separate array to splice out of.
+// console.log(adjustableQuestion)
 // GamePlay
+var questionCounter = 0;
+var acceptingAnswers = false;
 
-var incorrectAnswer = -15;
-var acceptingAnswers = true;
-var availQuestion = [];
 
 function startGame() {
-    
-    console.log(question);
+    questionCounter = 0;
+    // console.log(adjustableQuestion[0]['answer']); targeting first answer in the adjustableQuestion array
     getNewQuestion();
 }
 
 function getNewQuestion() {
+    questionCounter++;
+    var randomQuestion = Math.floor(Math.random() * adjustableQuestion.length); //console.log(randomQuestion)
+    currentQuestion = adjustableQuestion[randomQuestion]; // number console.log(currentQuestion)
+    question.innerText = currentQuestion['question']; //populates the question on page. // console.log(question.innerText)
 
-
-    var randomQuestion = Math.floor(Math.random() * adjustableQuestion.length);
-    currentQuestion = adjustableQuestion[randomQuestion]; // number
-    question.innerText = currentQuestion['question']; //populates the question on page.
-
-    choice.forEach(chosen => {
-        var num = chosen.dataset['number'];
-        chosen.innerText = currentQuestion["chosen"+num];
-    })
+    // choice1.innerText = currentQuestion['choice1']; //populates the answer onto the page.
+    // choice2.innerText = currentQuestion['choice2']; //populates the answer onto the page.
+    // choice3.innerText = currentQuestion['choice3']; //populates the answer onto the page.
+    // choice4.innerText = currentQuestion['choice4']; //populates the answer onto the page.
     
-    // currentChoice = currentQuestion['choice1'];
-    // choice.innerText = currentQuestion['choice1'];
-    // console.log(currentChoice)
+    choices.forEach(choice => {
+        var _num = choice.dataset.number;
+        choice.innerText = currentQuestion["choice" + _num];
+    })
 
+    adjustableQuestion.splice(randomQuestion,1);
+    acceptingAnswers = true;
 
-//    for (var i = 0 ; i < questions.length; i++) {
-//     currentChoices = currentQuestion.number;
-//     choice.innerHTML = currentChoices + [i];
-//     console.log(choice.innerHTML);
-   
-// }
-    // choice(chozen => {
-    //     var number = chozen.dataset["number"];
-    //     console.log(number);
-    //     chozen.innerText = currentQuestion[chozen + number];
-        console.log(choice)
-    // })    
+};
 
-    console.log(randomQuestion)
-    console.log(currentQuestion)
-    console.log(question.innerText)
-
-
-/// select choice from list 
-    choice.forEach(chosen => {
+// select choice from list 
+    choices.forEach(chosen => {
         chosen.addEventListener("click", e => {
             console.log(e.target)
         })
     });
-console.log(currentQuestion.dataset)
+    
 
-choice.forEach(choices => {
+   
+    
+choices.forEach(choices => {
     choices.addEventListener("click", e =>{
         if (!acceptingAnswers) return;
 
-        acceptingAnswers = false;
+        acceptingAnswers = true;
         var selectedChoice = e.target;
         var selectedAnswer = selectedChoice.dataset['number'];
         console.log(selectedAnswer);
         getNewQuestion();
     })
 })
-///
+// ///
     
 
     
-}
+
 
 
 startGame()
